@@ -9,22 +9,14 @@ class EditContact extends Component {
   state = {
     firstName: "",
     lastName: "",
-    email: "",
-    phoneNumber: "",
+    tags: "",
+    title: "",
     notes: "",
-    customField: "",
-    customValue: "",
-    dateOfBirth: new Date(),
-    toggle: false,
+    fullName: "",
   };
 
   onChange = (e) => {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
-  };
-
-  toggleChange = () => {
-    const newToggle = !this.state.toggle;
-    this.setState({ toggle: newToggle });
   };
 
   componentDidMount() {
@@ -37,30 +29,18 @@ class EditContact extends Component {
       `http://localhost:5000/content-list/${id}`
     );
     this.setState({
-      firstName: response.data.contact.firstName,
-      lastName: response.data.contact.lastName,
-      email: response.data.contact.email,
-      phoneNumber: response.data.contact.phoneNumber,
-      notes: response.data.contact.notes,
-      customField: response.data.contact.customField,
-      customValue: response.data.contact.customValue,
-      dateOfBirth: response.data.contact.dateOfBirth,
+      firstName: response?.data?.content?.firstName,
+      lastName: response?.data?.content?.lastName,
+      tags: response?.data?.content?.tags,
+      title: response?.data?.content?.title,
+      notes: response?.data?.content?.notes,
     });
     // console.log("My email", this.state.email);
   };
 
   onSubmit = async (e) => {
     const id = this.props.match.params.id;
-    const {
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      notes,
-      customField,
-      customValue,
-      dateOfBirth,
-    } = this.state;
+    const { firstName, lastName, tags, title, notes } = this.state;
     e.preventDefault();
     if (!firstName) {
       Swal.fire({
@@ -80,34 +60,13 @@ class EditContact extends Component {
         showConfirmButton: false,
         timer: 2000,
       });
-    } else if (!email) {
-      Swal.fire({
-        title: "Error",
-        text: "You forgot email id, It is mandatory",
-        icon: "error",
-        position: "center",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-    } else if (!phoneNumber) {
-      Swal.fire({
-        title: "Error",
-        text: "You forgot phone number, It is mandatory",
-        icon: "error",
-        position: "center",
-        showConfirmButton: false,
-        timer: 2000,
-      });
     }
     const newContact = {
       firstName,
       lastName,
-      email,
-      phoneNumber,
+      tags,
+      title,
       notes,
-      customField,
-      customValue,
-      dateOfBirth,
     };
     try {
       const config = {
@@ -138,23 +97,8 @@ class EditContact extends Component {
     }
   };
 
-  //   onChangeDates = (date) => {
-  //     setContact({
-  //       date,
-  //     });
-  //   };
   render() {
-    const {
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      notes,
-      //   dateOfBirth,
-      customField,
-      customValue,
-      toggle,
-    } = this.state;
+    const { firstName, lastName, tags, title, notes } = this.state;
     return (
       <div>
         <div className="container mt-5 mb-5">
@@ -184,22 +128,22 @@ class EditContact extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Email: </label>
+              <label>Title: </label>
               <input
                 type="text"
                 name="email"
                 className="form-control"
-                value={email}
+                value={title}
                 onChange={(e) => this.onChange(e)}
               />
             </div>
             <div className="form-group">
-              <label>Phone Number: </label>
+              <label>Tags: </label>
               <input
                 type="text"
                 name="phoneNumber"
                 className="form-control"
-                value={phoneNumber}
+                value={tags}
                 onChange={(e) => this.onChange(e)}
               />
             </div>
@@ -217,41 +161,12 @@ class EditContact extends Component {
             </div>
 
             <div className="form-group">
-              {" "}
-              <div
+              <input
+                type="submit"
+                value="Save"
                 className="btn create-btn"
-                style={{ color: "white" }}
-                onClick={this.toggleChange}
-              >
-                Add field
-              </div>
-            </div>
-
-            {toggle ? (
-              <div className="form-group">
-                <div className="custom-field">
-                  <input
-                    type="text"
-                    name="customField"
-                    className="form-control"
-                    placeholder="Field name"
-                    value={customField}
-                    onChange={(e) => this.onChange(e)}
-                  />
-                  <input
-                    type="text"
-                    name="customValue"
-                    className="form-control custom-value"
-                    value={customValue}
-                    placeholder="Value"
-                    onChange={(e) => this.onChange(e)}
-                  />
-                </div>
-              </div>
-            ) : null}
-
-            <div className="form-group">
-              <input type="submit" value="Save" className="btn create-btn" />
+                onChange={(e) => this.onSubmit(e)}
+              />
             </div>
           </form>
         </div>

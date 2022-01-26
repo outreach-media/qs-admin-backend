@@ -6,6 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import _ from "lodash";
 import "../App.css";
+
 class ContactList extends Component {
   constructor(props) {
     super(props);
@@ -82,13 +83,11 @@ class ContactList extends Component {
               <tr className="winner__table">
                 <th>S/N</th>
                 <th>Winner Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>DOB</th>
+                <th>Title</th>
                 <th>Notes</th>
-                <th>Custom Field</th>
+                <th>Created at</th>
+                <th>Tags</th>
                 <th>Actions</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -98,13 +97,11 @@ class ContactList extends Component {
                   <td>
                     {contact.firstName} {contact.lastName}
                   </td>
-                  <td>{contact.email}</td>
-                  <td>{contact.phoneNumber}</td>
-                  <td>{contact.dateOfBirth.slice(0, 10)}</td>
+                  <td>{contact.title}</td>
                   <td>{contact.notes}</td>
-                  <td>
-                    {contact.customField} {contact.customValue}
-                  </td>
+                  <td>{contact.createdAt.slice(0, 10)}</td>
+                  <td>{contact.tags}</td>
+
                   <td>
                     <Link to={`/edit-contact/${contact._id}`}>
                       <FaEdit />

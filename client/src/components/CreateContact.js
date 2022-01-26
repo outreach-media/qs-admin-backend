@@ -4,40 +4,24 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import "../App.css";
 import { Link } from "react-router-dom";
-import validator from "validator";
+// import validator from "validator";
 
 const CreateContact = () => {
-  const [toggle, setToggle] = useState(false);
+  // const [toggle, setToggle] = useState(false);
   const [contact, setContact] = useState({
     firstName: "",
     lastName: "",
-    email: "",
-    phoneNumber: "",
+    tags: "",
+    title: "",
     notes: "",
-    customField: "",
-    customValue: "",
-    dateOfBirth: "",
     fullName: "",
   });
-  const {
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    notes,
-    customField,
-    customValue,
-    dateOfBirth,
-  } = contact;
+  const { firstName, lastName, tags, title, notes } = contact;
 
   const onChange = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
 
-  const toggleChange = () => {
-    const newToggle = !toggle;
-    setToggle(newToggle);
-  };
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!firstName) {
@@ -58,55 +42,28 @@ const CreateContact = () => {
         showConfirmButton: false,
         timer: 2000,
       });
-    } else if (!email) {
+    } else if (!title) {
       Swal.fire({
         title: "Error",
-        text: "You forgot email id, It is mandatory",
+        text: "Enter a title",
         icon: "error",
         position: "center",
         showConfirmButton: false,
         timer: 2000,
       });
-    } else if (validator.isEmail(email) === false) {
+    } else if (!tags) {
       Swal.fire({
         title: "Error",
-        text: "Invalid mail id",
+        text: "Put some tags",
         icon: "error",
         position: "center",
         showConfirmButton: false,
         timer: 2000,
       });
-    } else if (!phoneNumber) {
+    } else if (!notes) {
       Swal.fire({
         title: "Error",
-        text: "You forgot phone number, It is mandatory",
-        icon: "error",
-        position: "center",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-    } else if (phoneNumber.length > 11) {
-      Swal.fire({
-        title: "Error",
-        text: "Mobile number length should be of 11 numbers maximum",
-        icon: "error",
-        position: "center",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-    } else if (!dateOfBirth) {
-      Swal.fire({
-        title: "Error",
-        text: "Please provide date of birth",
-        icon: "error",
-        position: "center",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-    } else if (validator.isMobilePhone(phoneNumber) === false) {
-      Swal.fire({
-        title: "Error",
-        text: "Invalid Input, please enter valid number",
+        text: "Put some notes also",
         icon: "error",
         position: "center",
         showConfirmButton: false,
@@ -116,12 +73,9 @@ const CreateContact = () => {
       const newContact = {
         firstName,
         lastName,
-        email,
-        phoneNumber,
+        title,
+        tags,
         notes,
-        customField,
-        customValue,
-        dateOfBirth,
       };
 
       try {
@@ -166,7 +120,7 @@ const CreateContact = () => {
         <Link to="/">
           <p>Back to Home</p>
         </Link>
-        <h3>Create Contacts</h3>
+        <h3>Create Content</h3>
         <form onSubmit={(e) => onSubmit(e)}>
           <div className="form-group">
             <label>Firstname: </label>
@@ -189,35 +143,24 @@ const CreateContact = () => {
             />
           </div>
           <div className="form-group">
-            <label>Email: </label>
+            <label>Title: </label>
             <input
               type="text"
-              name="email"
+              name="title"
               className="form-control"
-              value={contact.email}
+              value={contact.title}
               onChange={(e) => onChange(e)}
             />
           </div>
           <div className="form-group">
-            <label>Phone Number: </label>
+            <label>Tags: </label>
             <input
               type="text"
-              name="phoneNumber"
+              name="tags"
               className="form-control"
-              value={contact.phoneNumber}
+              value={contact.tags}
               onChange={(e) => onChange(e)}
             />
-          </div>
-          <div className="form-group">
-            <label>Date: </label>
-            <div>
-              <input
-                type="date"
-                name="dateOfBirth"
-                value={dateOfBirth}
-                onChange={(e) => onChange(e)}
-              />
-            </div>
           </div>
           <div className="form-group">
             <label>Notes: </label>
@@ -233,42 +176,8 @@ const CreateContact = () => {
           </div>
 
           <div className="form-group">
-            {" "}
-            <div
-              className="btn create-btn"
-              style={{ color: "white" }}
-              onClick={toggleChange}
-            >
-              Add field
-            </div>
-          </div>
-
-          {toggle ? (
-            <div className="form-group">
-              <div className="custom-field">
-                <input
-                  type="text"
-                  name="customField"
-                  className="form-control"
-                  placeholder="Field name"
-                  value={contact.customField}
-                  onChange={(e) => onChange(e)}
-                />
-                <input
-                  type="text"
-                  name="customValue"
-                  className="form-control custom-value"
-                  value={contact.customValue}
-                  placeholder="Value"
-                  onChange={(e) => onChange(e)}
-                />
-              </div>
-            </div>
-          ) : null}
-
-          <div className="form-group">
             <button type="submit" className="btn create-btn">
-              Create Contact{" "}
+              Create Content{" "}
             </button>
           </div>
         </form>

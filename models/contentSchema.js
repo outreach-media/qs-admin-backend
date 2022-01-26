@@ -14,37 +14,31 @@ const contentSchema = new mongoose.Schema(
       maxlength: 32,
       trim: true,
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    phoneNumber: {
-      type: Number,
-      required: true,
-      maxlength: 10,
-      trim: true,
-    },
     notes: {
       type: String,
-      maxlength: 50,
+      maxlength: 5000,
       trim: true,
     },
-    customField: {
+    title: {
       type: String,
-      maxlength: 32,
+      maxlength: 500,
       trim: true,
     },
-    customValue: {
+    tags: {
       type: String,
-      maxlength: 50,
+      maxlength: 500,
       trim: true,
     },
-
-    dateOfBirth: {
-      type: Date,
-    },
+    // customField: {
+    //   type: String,
+    //   maxlength: 32,
+    //   trim: true,
+    // },
+    // customValue: {
+    //   type: String,
+    //   maxlength: 50,
+    //   trim: true,
+    // },
   },
   { timestamps: true }
 );

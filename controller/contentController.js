@@ -35,22 +35,16 @@ exports.createContent = async (req, res) => {
   try {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const email = req.body.email;
-    const phoneNumber = req.body.phoneNumber;
     const notes = req.body.notes;
-    const customField = req.body.customField;
-    const customValue = req.body.customValue;
-    const dateOfBirth = Date.parse(req.body.dateOfBirth);
+    const title = req.body.title;
+    const tags = req.body.tags;
 
     const newContent = new Contents({
       firstName,
       lastName,
-      email,
-      phoneNumber,
+      title,
+      tags,
       notes,
-      customField,
-      customValue,
-      dateOfBirth,
     });
 
     const content = await newContent.save();
