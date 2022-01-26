@@ -1,0 +1,79 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+/* Create contact */
+
+.custom-field {
+  display: flex;
+}
+.custom-field input {
+  width: 8rem;
+  margin-right: 2rem;
+}
+.custom-field .custom-value {
+  width: 18rem;
+}
+
+/* details page */
+.details {
+  display: grid;
+  justify-content: center;
+  margin-top: 6rem;
+  height: 30rem;
+  width: 30rem;
+  margin-left: 30%;
+  padding: 2rem 2rem;
+  box-shadow: 2px 3px 4px 3px grey;
+}
+
+.individual p {
+  margin-top: -2rem;
+  margin-left: 8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* main contact */
+
+.table__head {
+  color: #ffffff;
+  font-weight: 700;
+  background: #9b4085;
+  background: -moz-linear-gradient(-45deg, #9b4085 0%, #608590 100%);
+  background: -webkit-linear-gradient(-45deg, #9b4085 0%, #608590 100%);
+  background: linear-gradient(135deg, #9b4085 0%, #608590 100%);
+  white-space: nowrap;
+}
+.table-bordered td,
+.table-bordered th {
+  border: 0px solid #fff;
+}
+.add-contact-btn {
+  background: #9b4085;
+  color: #ffffff;
+  margin-top: 2rem;
+}
+.view-btn {
+  background: #9b4085;
+  color: #ffffff;
+}
+.form-inline > input {
+  margin-top: 4rem;
+  margin-bottom: -5rem;
+}
+
+.winner__table {
+  white-space: pre;
+}
+
+@media screen and (max-width: 567px) {
+  .winner__table {
+    font-size: 1rem;
+  }
+}
+
+/* Create-contact & Edit-contact*/
+.create-btn {
+  background: #9b4085;
+  color: #ffffff;
+}
