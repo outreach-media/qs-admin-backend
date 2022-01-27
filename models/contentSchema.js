@@ -29,6 +29,10 @@ const contentSchema = new mongoose.Schema(
       maxlength: 500,
       trim: true,
     },
+    photo: {
+      data: Buffer,
+      contentType: String,
+    },
     // customField: {
     //   type: String,
     //   maxlength: 32,
