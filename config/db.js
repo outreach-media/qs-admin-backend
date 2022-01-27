@@ -4,8 +4,7 @@ const config = require("config");
 require("dotenv").config();
 
 // URI
-let mongoAtlasUri =
-  "mongodb+srv://knowhow:46JcIuZXukmeyu9Z@cluster0.5r5fy.mongodb.net/knowhow-db?retryWrites=true&w=majority";
+let mongoAtlasUri = process.env.DATABASE_URI;
 
 // DB connection
 const connectDB = async () => {
