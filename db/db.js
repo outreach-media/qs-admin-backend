@@ -8,12 +8,15 @@ let mongoAtlasUri = process.env.DATABASE_URI;
 // DB connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(mongoAtlasUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    });
+    await mongoose.connect(
+      "mongodb+srv://knowhow:46JcIuZXukmeyu9Z@cluster0.5r5fy.mongodb.net/knowhow-db?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+      }
+    );
 
     console.log("MongoDB Atlas connected.....!!!");
     console.log(mongoAtlasUri);
