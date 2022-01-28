@@ -21,7 +21,7 @@ connectDB();
 const contentList = require("./routes/contentRoute");
 
 //routes
-app.use("/content-list", contentList);
+app.use("/content", contentList);
 //server
 const port = process.env.PORT || 5000;
 const server_host = "0.0.0.0";
