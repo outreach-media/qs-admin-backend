@@ -33,16 +33,6 @@ const contentSchema = new mongoose.Schema(
       data: Buffer,
       contentType: String,
     },
-    // customField: {
-    //   type: String,
-    //   maxlength: 32,
-    //   trim: true,
-    // },
-    // customValue: {
-    //   type: String,
-    //   maxlength: 50,
-    //   trim: true,
-    // },
   },
   { timestamps: true }
 );
