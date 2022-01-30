@@ -19,7 +19,7 @@ const connectDB = async () => {
     );
 
     console.log("MongoDB Atlas connected.....!!!");
-    console.log(mongoAtlasUri);
+    // console.log(mongoAtlasUri);
   } catch (error) {
     console.log(error);
     // exit process with fail

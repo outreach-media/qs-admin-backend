@@ -19,10 +19,12 @@ app.use(function (req, res, next) {
 // conncet database
 connectDB();
 
-const contentList = require("./routes/contentRoute");
+const contentRoute = require("./routes/contentRoute");
+const authRoute = require("./routes/authRoute");
 
 //routes
-app.use("/content", contentList);
+app.use("/content", contentRoute);
+app.use("/api", authRoute);
 
 //server
 const port = process.env.PORT || 5000;
