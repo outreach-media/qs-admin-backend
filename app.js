@@ -21,10 +21,12 @@ connectDB();
 
 const contentRoute = require("./routes/contentRoute");
 const authRoute = require("./routes/authRoute");
+const subscribeRoute = require("./routes/subscribeRoute");
 
 //routes
 app.use("/content", contentRoute);
 app.use("/api", authRoute);
+app.use("/api", subscribeRoute);
 
 //server
 const port = process.env.PORT || 5000;
