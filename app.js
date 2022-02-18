@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const colore = require("colors");
 const connectDB = require("./db/db");
 const app = express();
 require("dotenv").config();
-
+const { errorHandler } = require("./middleware/errorHandler");
 //middleware
 app.use(express.json({ extended: false }));
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(function (req, res, next) {
   );
   next();
 });
+app.use(errorHandler);
 
 // conncet database
 connectDB();

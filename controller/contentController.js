@@ -11,7 +11,7 @@ exports.getAllContent = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "Error",
-      err,
+      err: err.message,
     });
   }
 };
@@ -26,7 +26,7 @@ exports.getContentById = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "Error",
-      err,
+      err: err.message,
     });
   }
 };
@@ -56,7 +56,7 @@ exports.createContent = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "Error",
-      err,
+      err: err.message,
     });
   }
 };
@@ -77,7 +77,7 @@ exports.updateContent = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "Error",
-      err,
+      err: err.message,
     });
   }
 };
@@ -94,7 +94,7 @@ exports.deleteContent = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "Error",
-      err,
+      err: err.message,
     });
   }
 };
