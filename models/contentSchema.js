@@ -35,6 +35,10 @@ const contentSchema = new mongoose.Schema(
       data: Buffer,
       contentType: String,
     },
+    writer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );

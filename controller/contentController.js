@@ -90,6 +90,7 @@ exports.deleteContent = async (req, res) => {
     await content.remove();
     res.json({
       msg: "Contact successfully deleted ",
+      id: req.params.id,
     });
   } catch (err) {
     res.status(400).json({

@@ -2,8 +2,9 @@ const User = require("../models/userSchema");
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+
 // SIGNUP;
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -11,8 +12,19 @@ exports.signup = (req, res) => {
       error: errors.array()[0].msg,
     });
   }
+
+  //Check users
+  const userExists = await User.findOne({ email: req.body.email });
+  if (userExists) {
+    res.status(400);
+    res.json({
+      Status: "User already exists",
+    });
+    throw new Error("User already exists");
+  }
+
   const user = new User(req.body);
-  user.save((err, user) => {
+  await user.save((err, user) => {
     if (err) {
       return res.status(400).json({
         err: "Not being able to save user",
@@ -23,12 +35,13 @@ exports.signup = (req, res) => {
       lastName: user.lastName,
       email: user.email,
       id: user._id,
+      // pass: user.encry_password,
     });
   });
 };
 
 // LOGIN/SIGNIN
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   const errors = validationResult(req);
   const { email, password } = req.body;
 
@@ -39,7 +52,7 @@ exports.login = (req, res) => {
   }
 
   // to find email and password in DB
-  User.findOne({ email }, (err, user) => {
+  await User.findOne({ email }, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
         error: "Email dose not exists",
