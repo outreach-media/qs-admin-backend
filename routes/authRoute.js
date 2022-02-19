@@ -6,6 +6,7 @@ const {
   login,
   signout,
   getMe,
+  getAllUsers,
 } = require("../controller/authController");
 const { protect, isAdmin } = require("../middleware/authHandler");
 
@@ -46,7 +47,8 @@ router.post(
   ],
   login
 );
-router.get("/me", protect, getMe);
+router.get("/all-users", protect, isAdmin, getAllUsers);
+router.get("/profile", protect, getMe);
 router.get("/signout", signout);
 
 module.exports = router;

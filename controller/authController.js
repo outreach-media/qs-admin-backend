@@ -88,7 +88,23 @@ exports.login = async (req, res) => {
   });
 };
 
-// Get own profile
+// GET ALL USERS
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      status: "Success",
+      Total: users.length,
+      users,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "Error",
+      err: err.message,
+    });
+  }
+};
+// GET OWN PROFILE
 exports.getMe = async (req, res) => {
   const { role, _id, firstName, lastName, email } = await User.findById(
     req.user._id
@@ -98,6 +114,7 @@ exports.getMe = async (req, res) => {
 
 // SIGNOUT
 exports.signout = (req, res) => {
+  S;
   res.clearCookie("token");
   res.status(200).json({
     status: "Success",

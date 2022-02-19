@@ -4,7 +4,7 @@ const { check, validationResult } = require("express-validator");
 require("dotenv").config();
 
 // SUBSCRIBE;
-exports.subscribeUser = (req, res) => {
+exports.subscribeUser = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -13,7 +13,7 @@ exports.subscribeUser = (req, res) => {
     });
   }
   const subscribe = new Subscribe(req.body);
-  subscribe.save((err, subscribe) => {
+  await subscribe.save((err, subscribe) => {
     if (err) {
       return res.status(400).json({
         err: "Not being able to save subscriber",
