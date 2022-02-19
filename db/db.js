@@ -3,7 +3,9 @@ const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 // URI
-let mongoAtlasUri = process.env.DATABASE_URI;
+// let mongoAtlasUri = process.env.DATABASE_URI;
+let mongoAtlasUri =
+  "mongodb+srv://knowhow:46JcIuZXukmeyu9Z@cluster0.5r5fy.mongodb.net/knowhow-db?retryWrites=true&w=majority";
 // DB connection
 const connectDB = async () => {
   try {
