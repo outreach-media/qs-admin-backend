@@ -1,11 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
-const { signup, login, signout } = require("../controller/authController");
-// const { isSignedIn } = require("../middleware/auth");
+const {
+  signup,
+  login,
+  signout,
+  getMe,
+} = require("../controller/authController");
+const { protect, isAdmin } = require("../middleware/authHandler");
 
 router.post(
   "/signup",
+  protect,
+  isAdmin,
   [
     check("firstName")
       .isLength({ min: 2 })
@@ -39,11 +46,7 @@ router.post(
   ],
   login
 );
-
+router.get("/me", protect, getMe);
 router.get("/signout", signout);
-
-// router.get('/test', isSignedIn, (req, res) => {
-//     res.json(req.auth)
-// });
 
 module.exports = router;

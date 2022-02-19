@@ -68,7 +68,7 @@ exports.login = async (req, res) => {
     // create token
 
     // The "SECRET" variable is hard coded here, but it should go into the .env file
-    const SECRET = "aecfewfbnhfnvejebr";
+    const SECRET = process.env.SECRET;
     const token = jwt.sign({ _id: user._id }, SECRET);
     // put token in cookie
     res.cookie("token", token, { expire: new Date() + 9999 });
@@ -88,7 +88,15 @@ exports.login = async (req, res) => {
   });
 };
 
-// // SIGNOUT
+// Get own profile
+exports.getMe = async (req, res) => {
+  const { role, _id, firstName, lastName, email } = await User.findById(
+    req.user._id
+  );
+  res.json({ role, _id, firstName, lastName, email });
+};
+
+// SIGNOUT
 exports.signout = (req, res) => {
   res.clearCookie("token");
   res.status(200).json({
