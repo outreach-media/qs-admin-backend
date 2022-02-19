@@ -29,7 +29,7 @@ var userSchema = new mongoose.Schema(
     salt: String,
     role: {
       type: Number,
-      default: 0,
+      default: 2,
     },
   },
   { timestamps: true }
