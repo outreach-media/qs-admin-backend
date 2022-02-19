@@ -17,6 +17,6 @@ router
   .route("/:id")
   .get(protect, getContentById)
   .put(protect, updateContent)
-  .delete(isAdmin, deleteContent);
+  .delete(protect, isAdmin, deleteContent);
 
 module.exports = router;

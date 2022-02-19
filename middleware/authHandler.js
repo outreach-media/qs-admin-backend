@@ -30,6 +30,7 @@ const protect = async (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
+  console.log(req.user.role);
   if (req.user.role === 0) {
     return res.status(403).json({
       error: "You're not admin, access denied",
