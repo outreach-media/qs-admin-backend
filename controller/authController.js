@@ -69,6 +69,7 @@ exports.login = async (req, res) => {
 
     // The "SECRET" variable is hard coded here, but it should go into the .env file
     const SECRET = process.env.SECRET;
+    
     const token = jwt.sign({ _id: user._id }, SECRET);
     // put token in cookie
     res.cookie("token", token, { expire: new Date() + 9999 });

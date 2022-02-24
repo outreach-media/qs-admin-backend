@@ -31,7 +31,7 @@ app.use("/api", authRoute);
 app.use("/api", subscribeRoute);
 
 //server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 1993;
 const host = "0.0.0.0";
 app.listen(port, host, () => {
   console.log(`App is running at port ${port}`);

@@ -47,7 +47,7 @@ router.post(
   ],
   login
 );
-router.get("/all-users", protect, isAdmin, getAllUsers);
+router.get("/all-users", getAllUsers);
 router.get("/profile", protect, getMe);
 router.get("/signout", signout);
 
