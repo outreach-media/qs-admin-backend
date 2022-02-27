@@ -12,8 +12,6 @@ const { protect, isAdmin } = require("../middleware/authHandler");
 
 router.post(
   "/signup",
-  protect,
-  isAdmin,
   [
     check("firstName")
       .isLength({ min: 2 })
@@ -31,6 +29,8 @@ router.post(
       .matches(/\d/)
       .withMessage("Password must contain a number"),
   ],
+  protect,
+  isAdmin,
   signup
 );
 
@@ -47,7 +47,7 @@ router.post(
   ],
   login
 );
-router.get("/all-users", protect, isAdmin, getAllUsers);
+router.get("/all-users", getAllUsers);
 router.get("/profile", protect, getMe);
 router.get("/signout", signout);
 

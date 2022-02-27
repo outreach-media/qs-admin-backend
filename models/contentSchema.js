@@ -39,6 +39,10 @@ const contentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    contentState: {
+      type: String,
+      default: "Draft",
+    },
   },
   { timestamps: true }
 );

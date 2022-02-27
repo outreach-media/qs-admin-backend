@@ -3,7 +3,7 @@ const User = require("../models/userSchema");
 
 const protect = async (req, res, next) => {
   let token;
-
+  console.log("Req header", req.headers.authorization);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -30,7 +30,7 @@ const protect = async (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  console.log(req.user.role);
+  console.log("User roole => ", req.user.role);
   if (req.user.role !== 0) {
     return res.status(403).json({
       error: "You're not admin, access denied",
@@ -38,6 +38,7 @@ const isAdmin = (req, res, next) => {
   }
   next();
 };
+
 module.exports = {
   protect,
   isAdmin,

@@ -35,6 +35,7 @@ exports.signup = async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       id: user._id,
+      role: user.role,
       // pass: user.encry_password,
     });
   });
@@ -44,7 +45,7 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   const errors = validationResult(req);
   const { email, password } = req.body;
-
+  // console.log(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({
       error: errors.array()[0].msg,
@@ -66,12 +67,15 @@ exports.login = async (req, res) => {
     }
 
     // create token
-
     // The "SECRET" variable is hard coded here, but it should go into the .env file
     const SECRET = process.env.SECRET;
-    const token = jwt.sign({ _id: user._id }, SECRET);
+    const token = jwt.sign({ _id: user._id }, SECRET, {
+      expiresIn: "10h",
+    });
+
+    res.setHeader("authorization", "Bearer " + token);
     // put token in cookie
-    res.cookie("token", token, { expire: new Date() + 9999 });
+    // res.cookie("token", token, { expire: new Date() + 9999 });
 
     // send response to front end
     const { _id, firstName, lastName, email, role } = user;
@@ -114,7 +118,6 @@ exports.getMe = async (req, res) => {
 
 // SIGNOUT
 exports.signout = (req, res) => {
-  S;
   res.clearCookie("token");
   res.status(200).json({
     status: "Success",

@@ -14,6 +14,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+
   next();
 });
 app.use(errorHandler);
@@ -26,12 +27,12 @@ const authRoute = require("./routes/authRoute");
 const subscribeRoute = require("./routes/subscribeRoute");
 
 //routes
-app.use("/content", contentRoute);
+app.use("/api", contentRoute);
 app.use("/api", authRoute);
 app.use("/api", subscribeRoute);
 
 //server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 1993;
 const host = "0.0.0.0";
 app.listen(port, host, () => {
   console.log(`App is running at port ${port}`);
