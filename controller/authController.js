@@ -74,10 +74,9 @@ exports.login = async (req, res) => {
       expiresIn: "10h",
     });
 
-    res.setHeader("authorization", "Bearer " + token);
 =======
     
-    const token = jwt.sign({ _id: user._id }, SECRET);
+    // const token = jwt.sign({ _id: user._id }, SECRET);
 >>>>>>> 54f93b109cb3d8d4a7f382967770cb2808326c83
     // put token in cookie
     // res.cookie("token", token, { expire: new Date() + 9999 });
