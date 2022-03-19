@@ -30,6 +30,7 @@ const contentSchema = new mongoose.Schema(
       type: String,
       maxlength: 500,
       trim: true,
+      required: true,
     },
     photo: {
       type: String,

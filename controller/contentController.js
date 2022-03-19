@@ -50,7 +50,6 @@ exports.createContent = async (req, res) => {
     const title = req.body.title;
     const tags = req.body.tags;
     let photo = req.files.photo;
-
     await cloudinary.uploader.upload(
       photo.tempFilePath,
       function (error, result) {
