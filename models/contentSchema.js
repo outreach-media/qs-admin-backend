@@ -2,18 +2,18 @@ const mongoose = require("mongoose");
 
 const contentSchema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-      maxlength: 32,
-      trim: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-      maxlength: 32,
-      trim: true,
-    },
+    // firstName: {
+    //   type: String,
+    //   required: true,
+    //   maxlength: 32,
+    //   trim: true,
+    // },
+    // lastName: {
+    //   type: String,
+    //   required: true,
+    //   maxlength: 32,
+    //   trim: true,
+    // },
     notes: {
       type: String,
       maxlength: 5000,
@@ -32,8 +32,7 @@ const contentSchema = new mongoose.Schema(
       trim: true,
     },
     photo: {
-      data: Buffer,
-      contentType: String,
+      type: String,
     },
     writer: {
       type: mongoose.Schema.Types.ObjectId,

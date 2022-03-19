@@ -1,4 +1,15 @@
 const Contents = require("../models/contentSchema");
+const cloudinary = require("cloudinary").v2;
+
+// cloudinary config
+
+cloudinary.config({
+  cloud_name: "https-theoutreachmedia-com",
+  api_key: "464252331218129",
+  api_secret: "1l5chyx64ZfGE76Zth2MvpEUg30",
+  secure: true,
+});
+// CLOUDINARY_URL=cloudinary://464252331218129:1l5chyx64ZfGE76Zth2MvpEUg30@https-theoutreachmedia-com
 
 exports.getAllContent = async (req, res) => {
   try {
@@ -33,20 +44,28 @@ exports.getContentById = async (req, res) => {
 
 exports.createContent = async (req, res) => {
   try {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
+    // const firstName = req.body.firstName;
+    // const lastName = req.body.lastName;
     const notes = req.body.notes;
     const title = req.body.title;
     const tags = req.body.tags;
+    let photo = req.files.photo;
 
+    await cloudinary.uploader.upload(
+      photo.tempFilePath,
+      function (error, result) {
+        // console.log(result.url, error);
+        photo = result.url;
+      }
+    );
     const newContent = new Contents({
-      firstName,
-      lastName,
+      // firstName,
+      // lastName,
       title,
       tags,
       notes,
+      photo,
     });
-
     const content = await newContent.save();
     res.status(201).json({
       status: "Success",
