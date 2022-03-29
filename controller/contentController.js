@@ -49,22 +49,24 @@ exports.createContent = async (req, res) => {
     const notes = req.body.notes;
     const title = req.body.title;
     const tags = req.body.tags;
-    let photo = req.files.photo;
-    await cloudinary.uploader.upload(
-      photo.tempFilePath,
-      function (error, result) {
-        // console.log(result.url, error);
-        photo = result.url;
-      }
-    );
+    // let tempPhoto = req.files.photo;
+    // let photo;
+
+    // await cloudinary.uploader.upload(
+    //   tempPhoto.tempFilePath,
+    //   function (error, result) {
+    //     // console.log(result.url, error);
+    //     photo = result?.url;
+    //   }
+    // );
     const newContent = new Contents({
       // firstName,
       // lastName,
       title,
       tags,
       notes,
-      photo,
     });
+    // console.log("Photooooooo", tempPhoto);
     const content = await newContent.save();
     res.status(201).json({
       status: "Success",

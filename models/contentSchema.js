@@ -18,19 +18,19 @@ const contentSchema = new mongoose.Schema(
       type: String,
       maxlength: 5000,
       trim: true,
-      required: true,
+      // required: true,
     },
     title: {
       type: String,
       maxlength: 500,
       trim: true,
-      required: true,
+      // required: true,
     },
     tags: {
       type: String,
       maxlength: 500,
       trim: true,
-      required: true,
+      // required: true,
     },
     photo: {
       type: String,
