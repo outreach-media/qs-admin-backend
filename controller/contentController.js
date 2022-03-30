@@ -54,7 +54,7 @@ exports.createContent = async (req, res) => {
       tempPhoto.tempFilePath,
       function (error, result) {
         // console.log(result.url, error);
-        tempPhoto = result?.url;
+        tempPhoto = result.url;
       }
     );
     const newContent = new Contents({
