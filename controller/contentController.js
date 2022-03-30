@@ -44,27 +44,26 @@ exports.getContentById = async (req, res) => {
 
 exports.createContent = async (req, res) => {
   try {
-    // const firstName = req.body.firstName;
-    // const lastName = req.body.lastName;
     const notes = req.body.notes;
     const title = req.body.title;
     const tags = req.body.tags;
-    // let tempPhoto = req.files.photo;
+    let tempPhoto = req.files.photo;
     // let photo;
 
-    // await cloudinary.uploader.upload(
-    //   tempPhoto.tempFilePath,
-    //   function (error, result) {
-    //     // console.log(result.url, error);
-    //     photo = result?.url;
-    //   }
-    // );
+    await cloudinary.uploader.upload(
+      tempPhoto.tempFilePath,
+      function (error, result) {
+        // console.log(result.url, error);
+        tempPhoto = result?.url;
+      }
+    );
     const newContent = new Contents({
       // firstName,
       // lastName,
       title,
       tags,
       notes,
+      photo: tempPhoto,
     });
     // console.log("Photooooooo", tempPhoto);
     const content = await newContent.save();
@@ -103,6 +102,24 @@ exports.updateContent = async (req, res) => {
 };
 
 exports.deleteContent = async (req, res) => {
+  try {
+    const content = await Contents.findById(req.params.id);
+
+    if (!content) return res.status(404).json({ msg: "Post Not Found" });
+    await content.remove();
+    res.json({
+      msg: "Contact successfully deleted ",
+      id: req.params.id,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "Error",
+      err: err.message,
+    });
+  }
+};
+
+exports.approveContent = async (req, res) => {
   try {
     const content = await Contents.findById(req.params.id);
 

@@ -32,6 +32,7 @@ const contentSchema = new mongoose.Schema(
       trim: true,
       // required: true,
     },
+    // trk : { type : Array , "default" : [] }.
     photo: {
       type: String,
     },
