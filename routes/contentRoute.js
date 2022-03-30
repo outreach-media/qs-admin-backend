@@ -11,10 +11,7 @@ const { protect, isAdmin } = require("../middleware/authHandler");
 
 const router = express.Router();
 
-router
-  .route("/content")
-  .get(protect, getAllContent)
-  .post(protect, createContent);
+router.route("/content").get(getAllContent).post(protect, createContent);
 
 router
   .route("/content/:id")
